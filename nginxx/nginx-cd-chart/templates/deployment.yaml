@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "nginx-cd.fullname" . }}
+  labels:
+    app: {{ include "nginx-cd.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "nginx-cd.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "nginx-cd.name" . }}
+    spec:
+      containers:
+        - name: {{ include "nginx-cd.name" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 80
+          resources:
+{{ toYaml .Values.resources | indent 12 }}

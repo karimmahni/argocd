@@ -1,0 +1,25 @@
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: 1.25-alpine
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+nodePort:
+  enabled: false
+  port: 80
+  targetPort: 80
+  nodePort: 30080
+
+ingress:
+  enabled: true
+  className: ""
+  host: nginx-cd.karim-devops.lab
+  path: /
+  pathType: Prefix
+
+resources: {}
