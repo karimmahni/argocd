@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: nginx-cd
- labels:
-   app: nginx-cd
+  name: nginx-cd
+  labels:
+    app: nginx-cd
 spec:
- replicas: 1
- selector:
-   matchLabels:
-     app: nginx-cd
- template:
-   metadata:
-     labels:
-       app: nginx-cd
-   spec:
-     containers:
-       - name: nginx-cd
-         image: nginx:1.25-alpine
-         ports:
-           - containerPort: 80
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-cd
+  template:
+    metadata:
+      labels:
+        app: nginx-cd
+    spec:
+      containers:
+        - name: nginx-cd
+          image: nginx:1.25-alpine
+          ports:
+            - containerPort: 80
