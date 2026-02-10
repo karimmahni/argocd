@@ -5,15 +5,21 @@ metadata:
   namespace: wordpress
   labels:
     app: wordpress
+    app.kubernetes.io/name: wordpress
+    app.kubernetes.io/instance: wordpress
 spec:
   replicas: 3
   selector:
     matchLabels:
       app: wordpress
+      app.kubernetes.io/name: wordpress
+      app.kubernetes.io/instance: wordpress
   template:
     metadata:
       labels:
         app: wordpress
+        app.kubernetes.io/name: wordpress
+        app.kubernetes.io/instance: wordpress
     spec:
       containers:
         - name: wordpress
