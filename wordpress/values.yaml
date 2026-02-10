@@ -1,0 +1,36 @@
+replicaCount: 1
+
+image:
+  repository: wordpress
+  tag: "6.5-apache"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  className: ""
+  annotations: {}
+  hosts:
+    - host: wordpress.afpa-devops.lab
+      paths:
+        - path: /
+          pathType: Prefix
+
+persistence:
+  enabled: true
+  accessModes:
+    - ReadWriteMany
+  size: 8Gi
+  storageClass: nfs-static
+
+wordpress:
+  dbHost: "192.168.56.30:3306"
+  dbName: "wordpress"
+  dbUser: "wp_user"
+  dbPassword: "P@ssw0rd34"
+
+namespace:
+  create: true
