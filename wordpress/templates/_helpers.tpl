@@ -22,6 +22,4 @@ helm.sh/chart: {{ printf "%s-%s" .Chart.Name .Chart.Version | quote }}
 
 {{- define "wordpress.selectorLabels" -}}
 app: {{ include "wordpress.name" . }}
-app.kubernetes.io/name: {{ include "wordpress.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}
