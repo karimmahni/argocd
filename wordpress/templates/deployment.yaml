@@ -27,18 +27,30 @@ spec:
                 name: wordpress-config
             - secretRef:
                 name: wordpress-secret
+          startupProbe:
+            httpGet:
+              path: /wp-admin/install.php
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 30
           readinessProbe:
             httpGet:
-              path: /
-              port: http
-            initialDelaySeconds: 10
-            periodSeconds: 10
-          livenessProbe:
-            httpGet:
-              path: /
+              path: /wp-admin/install.php
               port: http
             initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 6
+          livenessProbe:
+            httpGet:
+              path: /wp-admin/install.php
+              port: http
+            initialDelaySeconds: 90
             periodSeconds: 20
+            timeoutSeconds: 5
+            failureThreshold: 6
           volumeMounts:
             - name: wp-content
               mountPath: /var/www/html/wp-content
