@@ -16,6 +16,8 @@ spec:
       app.kubernetes.io/instance: wordpress
   template:
     metadata:
+      annotations:
+        redeploy.kubernetes.io/triggered-at: "2026-02-13"
       labels:
         app: wordpress
         app.kubernetes.io/name: wordpress
