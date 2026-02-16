@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calendrer-ay
+  namespace: calendar-ay
+  labels:
+    app: calendrer-ay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: calendrer-ay
+  template:
+    metadata:
+      labels:
+        app: calendrer-ay
+    spec:
+      containers:
+        - name: calendrer-ay
+          image: harbor.grp-devsecops26.lab/test-job-harbor1/test-app1:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - configMapRef:
+                name: calendrer-ay-config
+            - secretRef:
+                name: calendar-app-secrets
+          readinessProbe:
+            httpGet:
+              path: /login
+              port: 5000
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /login
+              port: 5000
+            initialDelaySeconds: 20
+            timeoutSeconds: 2
+            periodSeconds: 10
+            failureThreshold: 5
+          volumeMounts:
+            - name: uploads
+              mountPath: /app/uploads
+            - name: logs
+              mountPath: /app/logs
+      volumes:
+        - name: uploads
+          persistentVolumeClaim:
+            claimName: pvc-calendrer-ay-uploads
+        - name: logs
+          persistentVolumeClaim:
+            claimName: pvc-calendrer-ay-logs
+      imagePullSecrets:
+        - name: harbor-regcred

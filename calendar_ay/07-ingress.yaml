@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: calendrer-ay
+  namespace: calendar-ay
+  labels:
+    app: calendrer-ay
+spec:
+  rules:
+    - host: calendar.grp-devsecops26.lab
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: calendrer-ay
+                port:
+                  number: 80

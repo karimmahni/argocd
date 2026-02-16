@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: calendrer-ay-config
+  namespace: calendar-ay
+  labels:
+    app: calendrer-ay
+data:
+  FLASK_ENV: "production"
+  APP_NAME: "DevOps Planner"
+  DATABASE_URL: "postgresql://calendar:$(POSTGRES_PASSWORD)@calendar-postgres:5432/calendar"
+  REDIS_URL: "redis://calendar-redis:6379/0"

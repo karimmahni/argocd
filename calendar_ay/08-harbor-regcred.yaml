@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: harbor-regcred
+  namespace: calendar-ay
+  labels:
+    app: calendrer-ay
+type: kubernetes.io/dockerconfigjson
+stringData:
+  .dockerconfigjson: |
+    {
+      "auths": {
+        "harbor.grp-devsecops26.lab": {
+          "username": "admin",
+          "password": "<HARBOR_ADMIN_PASSWORD>",
+          "auth": "<BASE64_ADMIN_PASSWORD>"
+        }
+      }
+    }
