@@ -12,8 +12,8 @@ stringData:
       "auths": {
         "harbor.grp-devsecops26.lab": {
           "username": "admin",
-          "password": "<HARBOR_ADMIN_PASSWORD>",
-          "auth": "<BASE64_ADMIN_PASSWORD>"
+          "password": "harbor34",
+          "auth": "YWRtaW46aGFyYm9yMzQ="
         }
       }
     }
